@@ -36,77 +36,79 @@ TEST_CASE("Non-identical Words are not equal")
 
 // --------
 
-// TEST_CASE("Case is ignored when comparing Words") {
-//	CHECK(Word{LOWERCASE} == Word{UPPERCASE});
-// }
+TEST_CASE("Case is ignored when comparing Words") {
+	CHECK(Word{LOWERCASE} == Word{UPPERCASE});
+}
 //
-// TEST_CASE("Punctuation is ignored when comparing Words") {
-//	auto word_with_punct = Word{PUNCTUATION + "hel" + PUNCTUATION + "lo" + PUNCTUATION};
-//	auto word_without_punct = Word{"hello"};
-//	CHECK(word_without_punct == word_with_punct);
-// }
+TEST_CASE("Punctuation is ignored when comparing Words") {
+	auto word_with_punct = Word{PUNCTUATION + "hel" + PUNCTUATION + "lo" + PUNCTUATION};
+	auto word_without_punct = Word{"hello"};
+	CHECK(word_without_punct == word_with_punct);
+}
 //
-// TEST_CASE("Word cannot consist solely of punctuation") {
-//	CHECK_THROWS_AS(Word{"!@#$%"}, WordContainsNoLetters);
-// }
+TEST_CASE("Word cannot consist solely of punctuation") {
+	CHECK_THROWS_AS(Word{"!@#$%"}, WordContainsNoLetters);
+}
 //
-// TEST_CASE("Word cannot contain a space") {
-//	CHECK_THROWS_AS(Word{"hello there"}, WordContainsSpace);
-// }
+TEST_CASE("Word cannot contain a space") {
+	CHECK_THROWS_AS(Word{"hello there"}, WordContainsSpace);
+}
 //
-// TEST_CASE("Word is queryable if greater than or equal to a specific size") {
-//	auto test_string = ""s;
-//	test_string.resize(MIN_SIZE_FOR_QUERY, 'a');
-//	auto test_word = Word{test_string};
-//	CHECK(test_word.isQueryable());
-// }
+TEST_CASE("Word is queryable if greater than or equal to a specific size") {
+	auto test_string = ""s;
+	test_string.resize(MIN_SIZE_FOR_QUERY, 'a');
+	auto test_word = Word{test_string};
+	CHECK(test_word.isQueryable());
+}
 //
-// TEST_CASE("Word is not queryable if less than a specific size") {
-//// Write this test...
-//}
+TEST_CASE("Word is not queryable if less than a specific size") {
+    auto test_string = "sa"s;
+	auto test_word = Word{test_string};
+	CHECK(!test_word.isQueryable());
+}
 
 // ------------- Tests for Line ----------------
 //
 //// Test null case for contains() first - here, an empty line
-// TEST_CASE("Word cannot be found in empty Line") {
-//    auto line = Line{""};
-//    CHECK_FALSE(line.contains(Word{"hello"}));
-// }
+TEST_CASE("Word cannot be found in empty Line") {
+   auto line = Line{""};
+   CHECK_FALSE(line.contains(Word{"hello"}));
+}
 //
-// TEST_CASE("Word can be found in a Line with a single Word") {
-//	auto line = Line{"Stop"};
-//	CHECK(line.contains(Word{"Stop"}));
-// }
+TEST_CASE("Word can be found in a Line with a single Word") {
+	auto line = Line{"Stop"};
+	CHECK(line.contains(Word{"Stop"}));
+}
 //
 //// It is always good to write tests which test boundary conditions
-// TEST_CASE("First and last Words in a Line can be found") {
-//	auto line = Line{"Walking on water and developing software from a specification are easy if both are frozen."};
-//	CHECK(line.contains(Word{"Walking"}));
-//	CHECK(line.contains(Word{"frozen"}));
-// }
+TEST_CASE("First and last Words in a Line can be found") {
+	auto line = Line{"Walking on water and developing software from a specification are easy if both are frozen."};
+	CHECK(line.contains(Word{"Walking"}));
+	CHECK(line.contains(Word{"frozen"}));
+}
 //
 //// Test not only success scenarios but also failure scenarios.
-// TEST_CASE("Word not in a Line cannot be found") {
-//	auto line = Line{"I have always wished for my computer to be as easy to use as my telephone; my wish has come true because I can no longer figure out how to use my telephone."};
-//	CHECK_FALSE(line.contains(Word{"cellphone"}));
-// }
+TEST_CASE("Word not in a Line cannot be found") {
+	auto line = Line{"I have always wished for my computer to be as easy to use as my telephone; my wish has come true because I can no longer figure out how to use my telephone."};
+	CHECK_FALSE(line.contains(Word{"cellphone"}));
+}
 //
-// TEST_CASE("Words are found irrespective of case") {
-//	auto line = Line{"You can stand on the shoulders of giants or a BIG enough pile of dwarfs, works either way."};
-//	CHECK(line.contains(Word{"big"}));
-//	CHECK(line.contains(Word{"STAND"}));
-// }
+TEST_CASE("Words are found irrespective of case") {
+	auto line = Line{"You can stand on the shoulders of giants or a BIG enough pile of dwarfs, works either way."};
+	CHECK(line.contains(Word{"big"}));
+	CHECK(line.contains(Word{"STAND"}));
+}
 //
-// TEST_CASE("Words are found irrespective of surrounding punctuation") {
-//	auto line = Line{"How can you tell if a person is a programmer? They use nested parentheses in normal writing (at least I do (sometimes))."};
-//	CHECK(line.contains(Word{"programmer"}));
-//	CHECK(line.contains(Word{"sometimes"}));
-// }
+TEST_CASE("Words are found irrespective of surrounding punctuation") {
+	auto line = Line{"How can you tell if a person is a programmer? They use nested parentheses in normal writing (at least I do (sometimes))."};
+	CHECK(line.contains(Word{"programmer"}));
+	CHECK(line.contains(Word{"sometimes"}));
+}
 //
-// TEST_CASE("Word which is not queryable cannot be found") {
-//    auto line = Line{"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."};
-//    CHECK_FALSE(line.contains(Word{"a"}));
-// }
+TEST_CASE("Word which is not queryable cannot be found") {
+   auto line = Line{"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."};
+   CHECK_FALSE(line.contains(Word{"a"}));
+}
 
 // ------------- Tests for Paragraph ----------------
 
